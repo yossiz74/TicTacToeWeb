@@ -1,3 +1,2 @@
-flask
-pytest
-pytest_flask
+flask~=2.3.3
+pytest~=7.4.1
