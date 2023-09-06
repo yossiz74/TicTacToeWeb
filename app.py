@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, render_template, send_from_directory
 import os
 
 app = Flask(__name__)
@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Hello, world!'
+    return render_template('index.html')
 
 @app.route('/favicon.ico')
 def favicon():

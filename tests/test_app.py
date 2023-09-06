@@ -14,9 +14,9 @@ def test_home_page(client):
     response = client.get("/")
     # check if the status code is 200 OK
     assert response.status_code == 200
-    # check if the response data contains "Hello, world!"
-    assert b"Hello, world!" in response.data
-
+    # check that index.html was loaded
+    assert b'<div id="board">' in response.data
+    
 
 def test_favicon(client):
     # send a GET request to the favicon

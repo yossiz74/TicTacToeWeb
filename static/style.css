@@ -1,0 +1,20 @@
+#board {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  position: relative;
+  display: flex; /* make it a flex container */
+  flex-wrap: wrap; /* allow flex items to wrap */
+  justify-content: space-between; /* align flex items horizontally */
+  align-content: space-between; /* align flex items vertically */
+}
+
+#board .cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  font-size: 50px;
+  text-align: center;
+  line-height: 100px;
+  flex-basis: 33.33%; /* set initial size of flex items */
+}
