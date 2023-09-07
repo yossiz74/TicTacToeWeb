@@ -39,3 +39,14 @@ export function checkWinner() {
         return board[2][0];
     }
 }
+
+export function handleCellClick(row, col, document = window.document) {
+    console.log(`Clicked on cell ${row}, ${col}`)
+    const cell = document.querySelector(`#cell-${row}-${col}`);
+    cell.textContent = "X";
+}
+
+// Attach handleCellClick to the window object
+if (typeof window !== 'undefined') {
+    window.handleCellClick = handleCellClick;
+}
