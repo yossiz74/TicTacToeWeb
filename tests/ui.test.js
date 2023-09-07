@@ -1,33 +1,24 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
-import jsdom from 'jsdom';
-import { handleCellClick } from '../public/game.js';
-const { JSDOM } = jsdom;
+import { launch } from 'puppeteer';
 
-describe('Game ui', () => {
-  let dom;
-  let document;
-  let window;
+describe('Mouse events', () => {
+  let browser;
+  let page;
 
-  beforeEach(() => {
-    // Load your HTML file
-    const html = readFileSync(resolve(__dirname, '../public/index.html'), 'utf-8');
-
-    // Create a new JSDOM instance
-    dom = new JSDOM(html);
-    document = dom.window.document;
-    window = dom.window;
+  beforeAll(async () => {
+    browser = await launch();
+    page = await browser.newPage();
+    await page.goto('http://localhost:5000');
   });
 
-  test('When a user clicks on an empty cell, an X is written in the game board', () => {
-    // Call the handleCellClick function directly
-    handleCellClick(0, 0, document);
+  afterAll(() => {
+    browser.close();
+  });
+  
 
-    // Get the first cell in the table
-    const firstCell = document.querySelector('#cell-0-0');
-    // Simulate a click event on the first cell
-    //firstCell.dispatchEvent(new window.MouseEvent('click'));
-    // Check that the first cell now contains an 'X'
-    expect(firstCell.textContent).toBe('X');
+  test('When a user clicks on an empty cell, an X is written in the game board', async () => {
+    // Use Puppeteer's API to simulate a mouse click event
+    await page.click('#cell-0-0');
+    // Use Jest's expect function to assert that the expected behavior occurred
+    expect(await page.$eval('#cell-0-0', el => el.textContent)).toBe('X');
   });
 });
