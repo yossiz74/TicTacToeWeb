@@ -47,6 +47,17 @@ export function checkWinner() {
     }
 }
 
+export function checkDraw() {
+    for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col ++) {
+            if (board[row][col] === "") {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 export function handleCellClick(row, col, document = window.document) {
     //console.log(`Clicked on cell ${row}, ${col} when current player is ${currentPlayer}`);
     if (winner !== null) {
@@ -69,6 +80,12 @@ export function handleCellClick(row, col, document = window.document) {
         winner = currentPlayer;
         // Display a message to let the players know who won
         errorMessageElement.textContent = `${winner} wins!`;
+        return;
+    }
+    if (checkDraw()) {
+        // Display a message to let the players know there was a draw
+        errorMessageElement.textContent = 'Draw!';
+        winner = 'draw';
         return;
     }
     currentPlayer = currentPlayer === "X" ? "O" : "X";

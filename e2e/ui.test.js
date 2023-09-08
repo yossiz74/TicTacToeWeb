@@ -74,4 +74,31 @@ describe('Mouse events', () => {
     const message = await page.$eval('#message', el => el.textContent);
     expect(message).toBe('X wins!');
   });
+  test('when there is a draw, a message is displayed', async () => {
+    await page.click('#cell-0-0');
+    await page.click('#cell-0-1');
+    await page.click('#cell-0-2');
+    await page.click('#cell-1-0');
+    await page.click('#cell-1-2');
+    await page.click('#cell-1-1');
+    await page.click('#cell-2-0');
+    await page.click('#cell-2-2');
+    await page.click('#cell-2-1');
+    const message = await page.$eval('#message', el => el.textContent);
+    expect(message).toBe('Draw!');
+  });
+  test('when there is a draw, nothing happens when the user clicks on a cell', async () => {
+    await page.click('#cell-0-0');
+    await page.click('#cell-0-1');
+    await page.click('#cell-0-2');
+    await page.click('#cell-1-0');
+    await page.click('#cell-1-2');
+    await page.click('#cell-1-1');
+    await page.click('#cell-2-0');
+    await page.click('#cell-2-2');
+    await page.click('#cell-2-1');
+    await page.click('#cell-1-1');
+    const message = await page.$eval('#message', el => el.textContent);
+    expect(message).toBe('Draw!');
+  });
 });
