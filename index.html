@@ -6,24 +6,34 @@
 </head>
 
 <body>
-  <div id="board">
-    <table>
-      <tr>
-        <td id="cell-0-0" class="cell" onclick="handleCellClick(0, 0)"></td>
-        <td id="cell-0-1" class="cell" onclick="handleCellClick(0, 1)"></td>
-        <td id="cell-0-2" class="cell" onclick="handleCellClick(0, 2)"></td>
-      </tr>
-      <tr>
-        <td id="cell-1-0" class="cell" onclick="handleCellClick(1, 0)"></td>
-        <td id="cell-1-1" class="cell" onclick="handleCellClick(1, 1)"></td>
-        <td id="cell-1-2" class="cell" onclick="handleCellClick(1, 2)"></td>
-      </tr>
-      <tr>
-        <td id="cell-2-0" class="cell" onclick="handleCellClick(2, 0)"></td>
-        <td id="cell-2-1" class="cell" onclick="handleCellClick(2, 1)"></td>
-        <td id="cell-2-2" class="cell" onclick="handleCellClick(2, 2)"></td>
-      </tr>
-    </table>
+  <div class="container">
+    <div id="board">
+      <table>
+        <tr>
+          <td id="cell-0-0" class="cell" onclick="handleCellClick(0, 0)"></td>
+          <td id="cell-0-1" class="cell" onclick="handleCellClick(0, 1)"></td>
+          <td id="cell-0-2" class="cell" onclick="handleCellClick(0, 2)"></td>
+        </tr>
+        <tr>
+          <td id="cell-1-0" class="cell" onclick="handleCellClick(1, 0)"></td>
+          <td id="cell-1-1" class="cell" onclick="handleCellClick(1, 1)"></td>
+          <td id="cell-1-2" class="cell" onclick="handleCellClick(1, 2)"></td>
+        </tr>
+        <tr>
+          <td id="cell-2-0" class="cell" onclick="handleCellClick(2, 0)"></td>
+          <td id="cell-2-1" class="cell" onclick="handleCellClick(2, 1)"></td>
+          <td id="cell-2-2" class="cell" onclick="handleCellClick(2, 2)"></td>
+        </tr>
+        <tr>
+          <td> <button id="restart-button" class="square-button">
+              <img src="images/restart-button-transparent.png" alt="Restart" />
+            </button>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
   </div>
   <div id="message"></div>
 
