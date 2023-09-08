@@ -7,7 +7,6 @@ describe('Mouse events', () => {
   beforeAll(async () => {
     browser = await launch({ headless: 'new' });
     page = await browser.newPage();
-    page.on('console', msg => console.log(msg.text()));
     await page.goto('http://localhost:5000');
   });
 
@@ -34,4 +33,19 @@ describe('Mouse events', () => {
     expect(await page.$eval('#cell-1-1', el => el.textContent)).toBe('X');
     expect(await page.$eval('#cell-0-0', el => el.textContent)).toBe('O');
   });
+  test('When a user clicks on a cell that is already occupied, an error message is displayed', async () => {
+    await page.click('#cell-0-0');
+    await page.click('#cell-0-0');
+    await page.waitForSelector('#message', { visible: true });
+    const errorMessage = await page.$eval('#message', el => el.textContent);
+    expect(errorMessage).toBe('Invalid move');
+  });
+  test('When a user clicks on a cell that is already occupied, the error message is removed when the user clicks on an empty cell', async () => {
+    await page.click('#cell-0-0');
+    await page.click('#cell-0-0');
+    await page.click('#cell-0-1');
+    const errorMessage = await page.$eval('#message', el => el.textContent);
+    expect(errorMessage).toBe('');
+  });
+  
 });

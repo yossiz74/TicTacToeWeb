@@ -18,3 +18,11 @@
   line-height: 100px;
   flex-basis: 33.33%; /* set initial size of flex items */
 }
+
+#message {
+  color: red; /* Text color */
+  font-size: 18px; /* Font size */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center-align text */
+  margin-top: 20px; /* Add some spacing from the game board */
+}

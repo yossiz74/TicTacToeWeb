@@ -47,12 +47,23 @@ export function checkWinner() {
 }
 
 export function handleCellClick(row, col, document = window.document) {
-    console.log(`Clicked on cell ${row}, ${col} when current player is ${currentPlayer}`)
+    console.log(`Clicked on cell ${row}, ${col} when current player is ${currentPlayer}`);
     const cell = document.querySelector(`#cell-${row}-${col}`);
+    
+    const errorMessageElement = document.querySelector('#message');
+    if (board[row][col] !== "") {
+      // Cell is already occupied, display an error message
+      errorMessageElement.textContent = 'Invalid move';
+      return;
+    }
+    errorMessageElement.textContent = '';
+    
+    // Continue with handling the valid move
     cell.textContent = currentPlayer;
+    board[row][col] = currentPlayer;
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-}
-
+  }
+  
 // Attach handleCellClick to the window object
 if (typeof window !== 'undefined') {
     window.handleCellClick = handleCellClick;
