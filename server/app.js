@@ -15,10 +15,10 @@ const __dirname = dirname(__filename);
 const app = express();
 
 app.use(limiter)
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 export default app;
