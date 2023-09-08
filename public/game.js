@@ -1,15 +1,21 @@
 let board = [["", "", ""], ["", "", ""], ["", "", ""]];
-export { board };
+let currentPlayer = "X";
+export { board, currentPlayer };
 
 export function emptyBoard() {
-    board = [["", "", ""], ["", "", ""], ["", "", ""]];
+  board = [["", "", ""], ["", "", ""], ["", "", ""]];
+  currentPlayer = "X";
+  console.log("Board has been emptied, current player is ${currentPlayer}");
 }
+
 export function makeMove(row, col, symbol) {
-    if (board[row][col] !== "") {
-        throw new Error("Invalid move");
-    }
-    board[row][col] = symbol;
+  if (board[row][col] !== "") {
+    throw new Error("Invalid move");
+  }
+  board[row][col] = symbol;
 }
+
+// ... (rest of your functions)
 export function checkWinner() {
     // Check rows
     for (let row = 0; row < 3; row++) {
@@ -41,9 +47,10 @@ export function checkWinner() {
 }
 
 export function handleCellClick(row, col, document = window.document) {
-    console.log(`Clicked on cell ${row}, ${col}`)
+    console.log(`Clicked on cell ${row}, ${col} when current player is ${currentPlayer}`)
     const cell = document.querySelector(`#cell-${row}-${col}`);
-    cell.textContent = "X";
+    cell.textContent = currentPlayer;
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
 }
 
 // Attach handleCellClick to the window object
