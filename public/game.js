@@ -31,6 +31,22 @@ export function checkWinner() {
     if (board[0][0] !== "" &&
         board[0][0] === board[1][1] &&
         board[0][0] === board[2][2]) {
-            return board[0][0];
-        }
+        return board[0][0];
+    }
+    if (board[2][0] !== "" &&
+        board[2][0] === board[1][1] &&
+        board[2][0] === board[0][2]) {
+        return board[2][0];
+    }
+}
+
+export function handleCellClick(row, col, document = window.document) {
+    console.log(`Clicked on cell ${row}, ${col}`)
+    const cell = document.querySelector(`#cell-${row}-${col}`);
+    cell.textContent = "X";
+}
+
+// Attach handleCellClick to the window object
+if (typeof window !== 'undefined') {
+    window.handleCellClick = handleCellClick;
 }
