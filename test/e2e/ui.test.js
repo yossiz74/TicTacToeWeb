@@ -88,4 +88,18 @@ describe('Mouse events', () => {
     const message = await page.$eval('#message', el => el.textContent);
     expect(message).toBe('Draw!');
   });
+  test('when restart button is clicked, the game is reset', async () => {
+    await winTheGame();
+    await page.click('#restart-button');
+    expect(await page.$eval('#cell-0-0', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-0-1', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-0-2', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-1-0', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-1-1', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-1-2', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-2-0', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-2-1', el => el.textContent)).toBe('');
+    expect(await page.$eval('#cell-2-2', el => el.textContent)).toBe('');
+    expect(await page.$eval('#message', el => el.textContent)).toBe('');
+  });
 });
