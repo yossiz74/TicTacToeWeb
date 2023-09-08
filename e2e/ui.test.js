@@ -13,7 +13,7 @@ describe('Mouse events', () => {
   beforeEach(async () => {
     await page.reload();
   });
-  
+
 
   afterAll(async () => {
     await browser.close();
@@ -36,7 +36,6 @@ describe('Mouse events', () => {
   test('When a user clicks on a cell that is already occupied, an error message is displayed', async () => {
     await page.click('#cell-0-0');
     await page.click('#cell-0-0');
-    await page.waitForSelector('#message', { visible: true });
     const errorMessage = await page.$eval('#message', el => el.textContent);
     expect(errorMessage).toBe('Invalid move');
   });
@@ -47,5 +46,32 @@ describe('Mouse events', () => {
     const errorMessage = await page.$eval('#message', el => el.textContent);
     expect(errorMessage).toBe('');
   });
-  
+  test('When a user wins the game, a message is displayed', async () => {
+    await page.click('#cell-0-0');
+    await page.click('#cell-1-0');
+    await page.click('#cell-0-1');
+    await page.click('#cell-1-1');
+    await page.click('#cell-0-2');
+    const message = await page.$eval('#message', el => el.textContent);
+    expect(message).toBe('X wins!');
+  });
+  test('When a user wins the game, nothing happens when the user clicks on an empty cell', async () => {
+    await page.click('#cell-0-0');
+    await page.click('#cell-1-0');
+    await page.click('#cell-0-1');
+    await page.click('#cell-1-1');
+    await page.click('#cell-0-2');
+    await page.click('#cell-1-2');
+    expect(await page.$eval('#cell-1-2', el => el.textContent)).toBe('');
+  });
+  test('When a user wins the game, nothing happens when the user clicks on an empty cell', async () => {
+    await page.click('#cell-0-0');
+    await page.click('#cell-1-0');
+    await page.click('#cell-0-1');
+    await page.click('#cell-1-1');
+    await page.click('#cell-0-2');
+    await page.click('#cell-0-0');
+    const message = await page.$eval('#message', el => el.textContent);
+    expect(message).toBe('X wins!');
+  });
 });

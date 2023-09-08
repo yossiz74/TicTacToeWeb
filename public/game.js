@@ -1,18 +1,19 @@
 let board = [["", "", ""], ["", "", ""], ["", "", ""]];
 let currentPlayer = "X";
+let winner = null;
 export { board, currentPlayer };
 
 export function emptyBoard() {
-  board = [["", "", ""], ["", "", ""], ["", "", ""]];
-  currentPlayer = "X";
-  console.log("Board has been emptied, current player is ${currentPlayer}");
+    board = [["", "", ""], ["", "", ""], ["", "", ""]];
+    currentPlayer = "X";
+    //console.log("Board has been emptied, current player is ${currentPlayer}");
 }
 
 export function makeMove(row, col, symbol) {
-  if (board[row][col] !== "") {
-    throw new Error("Invalid move");
-  }
-  board[row][col] = symbol;
+    if (board[row][col] !== "") {
+        throw new Error("Invalid move");
+    }
+    board[row][col] = symbol;
 }
 
 // ... (rest of your functions)
@@ -47,23 +48,32 @@ export function checkWinner() {
 }
 
 export function handleCellClick(row, col, document = window.document) {
-    console.log(`Clicked on cell ${row}, ${col} when current player is ${currentPlayer}`);
+    //console.log(`Clicked on cell ${row}, ${col} when current player is ${currentPlayer}`);
+    if (winner !== null) {
+        return;
+    }
+
     const cell = document.querySelector(`#cell-${row}-${col}`);
-    
+
     const errorMessageElement = document.querySelector('#message');
     if (board[row][col] !== "") {
-      // Cell is already occupied, display an error message
-      errorMessageElement.textContent = 'Invalid move';
-      return;
+        // Cell is already occupied, display an error message
+        errorMessageElement.textContent = 'Invalid move';
+        return;
     }
     errorMessageElement.textContent = '';
-    
     // Continue with handling the valid move
     cell.textContent = currentPlayer;
-    board[row][col] = currentPlayer;
+    makeMove(row, col, currentPlayer);
+    if (checkWinner()) {
+        winner = currentPlayer;
+        // Display a message to let the players know who won
+        errorMessageElement.textContent = `${winner} wins!`;
+        return;
+    }
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-  }
-  
+}
+
 // Attach handleCellClick to the window object
 if (typeof window !== 'undefined') {
     window.handleCellClick = handleCellClick;
