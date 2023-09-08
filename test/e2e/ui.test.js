@@ -14,7 +14,6 @@ describe('Mouse events', () => {
     await page.reload();
   });
 
-
   afterAll(async () => {
     await browser.close();
   });
