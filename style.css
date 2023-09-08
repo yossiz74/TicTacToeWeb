@@ -35,8 +35,8 @@
 }
 /* Style for the square button */
 .square-button {
-  width: 50px; /* Adjust the width to make it smaller */
-  height: 50px; /* Adjust the height to make it square */
+  width: 40px; /* Adjust the width to make it smaller */
+  height: 40px; /* Adjust the height to make it square */
   background-color: orange; /* Change the background color to orange */
   border: none; /* Remove the default button border */
   padding: 0; /* Remove any padding inside the button */
