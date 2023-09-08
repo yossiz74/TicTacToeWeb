@@ -15,9 +15,9 @@
     "winston": "^3.10.0"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "test:unit": "jest --testMatch='**/tests/**/*.test.js'",
-    "test:ui": "jest --runInBand --testMatch='**/e2e/**/*.test.js'",
-    "test": "npm run test:unit && npm run test:ui"
+    "start": "node server/server.js",
+    "test:unit": "jest --testMatch='**/test/unit/*.test.js'",
+    "test:e2e": "jest --runInBand --testMatch='**/test/e2e/*.test.js'",
+    "test": "npm run test:unit && npm run test:e2e"
   }
 }

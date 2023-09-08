@@ -1,4 +1,4 @@
-import { board, emptyBoard, makeMove, checkWinner, checkDraw } from "../public/game.js";
+import { board, emptyBoard, makeMove, checkWinner, checkDraw } from "../../js/game.js";
 
 describe("Game logic", () => {
   beforeEach(() => {
