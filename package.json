@@ -16,6 +16,8 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "test": "jest"
+    "test:unit": "jest --testMatch='**/tests/**/*.test.js'",
+    "test:ui": "jest --runInBand --testMatch='**/e2e/**/*.test.js'",
+    "test": "npm run test:unit && npm run test:ui"
   }
 }
