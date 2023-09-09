@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: yossiz74-tic-tac-toe
+  AZURE_WEBAPP_NAME: ${{ secrets.AZURE_WEBAPP_NAME }}
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   NODE_VERSION: '16.x'
 
@@ -15,11 +15,18 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ env.NODE_VERSION }}
+    - name: Cache node modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - name: npm install, build, and unit test
       run: |
         npm ci
@@ -27,8 +34,8 @@ jobs:
         npm run test:unit
     - name: e2e tests
       run: |
-        npm start &
-        sleep 2 # Wait for the app to start
+        npm start --silent &
+        npx wait-on http://localhost:5000
         npm run test:e2e
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
